@@ -1,0 +1,61 @@
+\documentclass[12pt, a4paper, twocolumn]{article}
+
+% --- PAQUETES ESENCIALES ---
+\usepackage[utf8]{inputenc}    
+\usepackage[T1]{fontenc}       
+\usepackage[spanish, es-tabla]{babel} 
+\usepackage{lmodern}           
+\usepackage{graphicx}          
+\usepackage{cite}              
+
+% --- ESTE ERA EL ERROR: FALTA ESTA LÍNEA ---
+\usepackage{geometry} 
+\geometry{margin=2cm}
+
+% --- TÍTULO Y AUTORES ---
+\title{\textbf{Detección y Análisis de Intrusiones en Redes Mediante la Plataforma T-Pot}}
+
+\author{
+    D. Cruz, A. Moreno, S. Peña, B. Olmos \\
+    \small Facultad de Ingeniería \\
+    \small \texttt{antonio-alain@WorkSpace.edu}
+}
+\date{}
+
+\begin{document}
+
+% Formato de título y resumen a una columna (estilo artículo científico)
+\twocolumn[
+  \begin{centering}
+    \maketitle
+    \begin{abstract}
+        \input{segmentos/abstract}
+        \vspace{0.4cm}
+        \noindent \textbf{Palabras clave:} IDS, Honeypot, T-Pot, Ciberseguridad.
+        \vspace{0.6cm}
+    \end{abstract}
+  \end{centering}
+]
+
+\section{Introducción}
+\input{segmentos/introduccion}
+
+\section{Metodología}
+\input{segmentos/metodologia}
+
+\subsection{Diseño y Escenario}
+\input{segmentos/diseno}
+
+\subsection{Población y Muestra}
+\input{segmentos/poblacion}
+
+\section{Resultados}
+\input{segmentos/resultados}
+
+\section{Discusión y Conclusiones}
+\input{segmentos/discusion}
+
+\section{Bibliografía}
+\input{segmentos/bibliografia}
+
+\end{document}
