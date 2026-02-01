@@ -1,0 +1,20 @@
+# Archivos y carpetas generados por LaTeX
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg
+*.pdf
+
+# Archivos temporales de editores
+*~
+*.swp
+*.bak
+.DS_Store
+Thumbs.db
