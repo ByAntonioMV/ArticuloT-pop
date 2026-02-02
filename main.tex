@@ -7,10 +7,14 @@
 \usepackage{lmodern}           
 \usepackage{graphicx}          
 \usepackage{cite}              
-
-% --- ESTE ERA EL ERROR: FALTA ESTA LÍNEA ---
 \usepackage{geometry} 
 \geometry{margin=2cm}
+\usepackage{float} 
+\usepackage{booktabs} 
+\usepackage{multirow} 
+\usepackage{array}  
+\usepackage{tabularx}
+\usepackage{ragged2e}
 
 % --- TÍTULO Y AUTORES ---
 \title{\textbf{Detección y Análisis de Intrusiones en Redes Mediante la Plataforma T-Pot}}
@@ -18,18 +22,19 @@
 \author{
     D. Cruz, A. Moreno, S. Peña, B. Olmos \\
     \small Facultad de Ingeniería \\
-    \small \texttt{antonio-alain@WorkSpace.edu}
+    \small \texttt{antonio-alain@WorkSpace.edu} \\
+    \small \texttt{brayan-emmanuel@WorkSpace.edu}
 }
 \date{}
 
 \begin{document}
 
-% Formato de título y resumen a una columna (estilo artículo científico)
+% Formato de título y resumen a una columna
 \twocolumn[
   \begin{centering}
     \maketitle
     \begin{abstract}
-        \input{segmentos/abstract}
+        Resumen placeholder.
         \vspace{0.4cm}
         \noindent \textbf{Palabras clave:} IDS, Honeypot, T-Pot, Ciberseguridad.
         \vspace{0.6cm}
@@ -38,24 +43,66 @@
 ]
 
 \section{Introducción}
-\input{segmentos/introduccion}
 
 \section{Metodología}
-\input{segmentos/metodologia}
 
 \subsection{Diseño y Escenario}
-\input{segmentos/diseno}
 
 \subsection{Población y Muestra}
-\input{segmentos/poblacion}
+En el contexto de esta investigación, la población se define como el conjunto total de posibles 
+amenazas y actividades maliciosas que podrían presentarse en un entorno de red local (LAN) 
+controlado, similar al simulado en el laboratorio. Esto incluye todos los tipos de intrusiones 
+internas, tales como escaneos de puertos, intentos de fuerza bruta, floods volumétricos y ataques 
+de denegación de servicio (DoS) en la capa de aplicación, generados por actores con acceso a la 
+red interna. Dado que el experimento se realizó en un segmento aislado sin exposición a internet, 
+la población se limita a amenazas internas, representando escenarios reales como empleados 
+descontentos, hosts comprometidos o malware con movimiento lateral dentro de una intranet 
+universitaria o corporativa.
+
+La muestra seleccionada para el estudio consistió en un conjunto de 4 estaciones de ataque 
+simuladas, correspondientes a computadoras portátiles independientes conectadas a la red local a 
+través de un switch Ethernet. Estas estaciones generaron tráfico malicioso controlado, capturado 
+por la plataforma T-Pot. Las direcciones IP asociadas a la muestra fueron: 192.168.10.71 
+(explorador de reconnaissance), 192.168.10.73 (intruso de fuerza bruta), 192.168.10.82 
+(saboteador volumétrico) y 192.168.10.74 (tester de estrés en capa de aplicación). Esta muestra 
+no probabilística fue seleccionada por conveniencia, ya que permitió simular patrones de 
+comportamiento reales en un entorno físico controlado, asegurando la reproducibilidad y el 
+aislamiento de variables externas.
+
+La selección de esta muestra se basa en la necesidad de representar diversidad en los perfiles 
+de amenaza interna, como se detalla en la Tabla 3 del reporte original. Aunque limitada a 4 
+actores, la muestra capturó un total de eventos representativos (e.g., múltiples intentos de 
+login, floods y escaneos), permitiendo un análisis cualitativo y cuantitativo de las 
+interacciones con los honeypots. Esta aproximación facilita la extrapolación a poblaciones más 
+amplias en entornos productivos, donde las amenazas internas representan un riesgo significativo 
+debido a su acceso inicial legítimo.
+
+\begin{table*}[htbp]
+\centering
+\small
+\caption{Tipos de Atacantes Identificados (Muestra Seleccionada)}
+\label{tab:tipos-atacantes}
+\begin{tabular}{
+  >{\RaggedRight\hspace{0pt}}p{3.6cm}
+  >{\centering\arraybackslash}p{2.4cm}
+  >{\RaggedRight\hspace{0pt}}p{5.0cm}
+  >{\RaggedRight\hspace{0pt}}p{5.0cm}
+}
+\toprule
+Perfil de Amenaza (Simulado) & Origen (IP) & Comportamiento Técnico Observado & Equivalencia en Escenario Real \\
+\midrule
+Insider Explorador (Reconnaissance) & 192.168.10.71 & Ejecución de barridos de red y escaneo de puertos para inventariar servicios. No hubo intento de explotación destructiva. & Empleado curioso o auditor interno no autorizado buscando servidores vulnerables o mal configurados dentro de la intranet. \\[1ex]
+Host Comprometido (Lateral Movement) & 192.168.10.73 & Ataques automatizados de diccionario contra servicios de administración (SSH). Alta velocidad de intentos. & Un equipo de la red interna infectado por malware (Botnet) intentando propagarse lateralmente hacia servidores críticos adivinando credenciales. \\[1ex]
+Insider Malicioso (Sabotage / DoS) & 192.168.10.74 192.168.10.82 & Generación de tráfico basura (Flood) y saturación de aplicaciones web para causar indisponibilidad. & Empleado descontento o atacante infiltrado cuyo objetivo es interrumpir las operaciones del negocio (Denegación de Servicio) desde adentro. \\
+
+\bottomrule
+\end{tabular}
+\end{table*}
 
 \section{Resultados}
-\input{segmentos/resultados}
 
 \section{Discusión y Conclusiones}
-\input{segmentos/discusion}
 
 \section{Bibliografía}
-\input{segmentos/bibliografia}
 
 \end{document}
