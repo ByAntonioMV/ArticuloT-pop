@@ -1,8 +1,116 @@
 
 
-\subsection{Descripción general de los datos}
 
-Se analizaron un total de XX muestras, de las cuales el XX\% correspondió a [categoría relevante]. La media de [variable principal] fue de XX (DE = XX).
+En esta sección se presentan los resultados obtenidos durante la implementación y monitoreo del sistema de detección de intrusiones utilizando T-Pot. Se incluyen las bitácoras de ataques registrados, el análisis del comportamiento de los usuarios (actores de amenaza), y la identificación de tipos de atacantes. Todos los ataques observados fueron internos, simulados en un entorno de laboratorio controlado.
+
+\subsection{Bitácora de Ataques Registrados}
+
+La bitácora registra los eventos de seguridad detectados por los honeypots y herramientas como Suricata. A continuación, se muestran las tabla con los ataques principales identificados y las observasiones al respescto.
+
+% Tabla 1: Bitácora de ataques registrados (Parte 1)
+\begin{table}[htbp]
+\centering
+{\fontsize{5}{7}\selectfont
+\caption{Bitácora de ataques registrados (Parte 1)}
+}
+\label{tab:bitacora1}
+{\fontsize{5}{8}\selectfont
+\begin{tabular}{clccl}
+\hline
+ID & Fecha/Hora & IP Origen & Puerto & Tipo Ataque \\
+\hline
+01 & 2026-01-20 09:15:00 & 192.168.10.71 & Multi (21, 22, 80) & Escaneo de Puertos \\
+02 & 2026-01-20 09:35:12 & 192.168.10.73 & SSH (22) & Fuerza Bruta \\
+03 & 2026-01-20 10:10:45 & 192.168.10.82 & TCP/UDP & Flood (SYN/UDP) \\
+04 & 2026-01-20 10:45:20 & 192.168.10.74 & HTTP / Web & DoS \\
+\hline
+\end{tabular}}
+\end{table}
+
+% Tabla 2: Observaciones de ataques registrados (Parte 2)
+\begin{table}[htbp]
+\centering
+\caption{Observaciones de ataques registrados (Parte 2)}
+\label{tab:bitacora2}
+{\fontsize{6}{8}\selectfont
+\begin{tabular}{cl}
+\hline
+ID & Observaciones \\
+\hline
+01 & Barrido secuencial en puertos TCP (Connect Scan).\\
+02 & Múltiples intentos fallidos. Uso de diccionarios (root, admin).\\
+03 & Saturación de tabla de conexiones y consumo de ancho de banda. \\
+04 & Solicitudes simultáneas (High req/sec) para agotar recursos (CPU/RAM). \\
+\hline
+\end{tabular}}
+\end{table}
+
+
+\subsection{Monitoreo y Análisis de Comportamiento de Usuarios}
+
+Se analizaron los patrones de interacción de los actores de amenaza, identificando perfiles basados en su comportamiento.
+
+\begin{table}[htbp]
+\centering
+\caption{Análisis Detallado de Comportamiento de Usuarios}
+\label{tab:analisis_comportamiento}
+{\fontsize{6}{8}\selectfont
+\begin{tabular}{clclll}
+\hline
+\hline
+192.168.10.71 & Explorador (Reconnaissance) & Sistemático / Secuencial. Peticiones ordenadas a múltiples puertos en bajo tiempo. & Nmap, Masscan & El usuario no busca explotar, sino mapear. Su comportamiento denota la fase inicial de un ataque (Information Gathering). No interactúa con la aplicación, solo verifica el estado del socket (Open/Closed). \\
+192.168.10.73 & Intruso (Brute Force) & Repetitivo / Automatizado. Alta frecuencia de intentos de login (aprox. 30/min). & Hydra, Medusa, Scripts Python & Comportamiento característico de un bot o script. La velocidad de ingreso de credenciales es humanamente imposible. Busca acceso administrativo persistente mediante diccionario de claves comunes. \\
+192.168.10.82 & Saboteador (Volumetric Flood) & Continuo / Agresivo. Flujo masivo de paquetes sin establecer conexión (Handshake incompleto). & Hping3, UDP Flooder & El actor no intenta comunicarse, sino saturar. Su patrón ignora las respuestas del servidor. El objetivo es agotar el ancho de banda o la tabla de estados del firewall, no el robo de información. \\
+192.168.10.74 & Stress Tester (App Layer DoS) & Simultáneo / Ráfaga. Múltiples conexiones HTTP concurrentes (High Concurrency). & LOIC, Apache Benchmark, Siege & Usuario simulando comportamiento legítimo pero a escala masiva. Ataca la capa de aplicación (Capa 7). Busca el agotamiento de recursos de procesamiento (CPU/RAM) del servicio web simulado. \\
+\hline
+\end{tabular}}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Monitoreo y Análisis de Comportamiento de Usuarios (Resumen)}
+\label{tab:monitoreo_usuarios}
+{\fontsize{6}{8}\selectfont
+\begin{tabular}{cll}
+\hline
+IP & Perfil & Descripción breve \\
+\hline
+192.168.10.71 & Explorador & Escaneo sistemático de puertos y servicios. \\
+192.168.10.73 & Intruso & Ataques de fuerza bruta automatizados. \\
+192.168.10.82 & Saboteador & Flood volumétrico y saturación de red. \\
+192.168.10.74 & Stress Tester & Ataques DoS a nivel aplicación (HTTP). \\
+\hline
+\end{tabular}}
+\end{table}
+
+%\begin{figure}[H]
+%\centering
+%\includegraphics[width=0.8\textwidth]{imagen1.9_monitoreo_ataques.png} % Reemplaza con el nombre real de la imagen
+%\caption{Monitoreo de Ataques}
+%\label{fig:monitoreo_ataques}
+%\end{figure}
+
+\subsection{Tipos de Atacantes Identificados}
+
+Todos los atacantes fueron internos, simulando amenazas como insiders o hosts comprometidos.
+
+\begin{table}[htbp]
+\centering
+\caption{Tipos de Atacantes Identificados}
+\label{tab:tipos_atacantes}
+{\fontsize{7}{8}\selectfont
+\begin{tabular}{clll}
+\hline
+Perfil de Amenaza (Simulado) & Origen (IP) & Comportamiento Técnico Observado & Equivalencia en Escenario Real \\
+\hline
+Insider Explorador (Reconnaissance) & 192.168.10.71 & Ejecución de barridos de red y escaneo de puertos para inventariar servicios. No hubo intento de explotación destructiva. & Empleado curioso o auditor interno no autorizado buscando servidores vulnerables o mal configurados dentro de la intranet. \\
+Host Comprometido (Lateral Movement) & 192.168.10.73 & Ataques automatizados de diccionario contra servicios de administración (SSH). Alta velocidad de intentos. & Un equipo de la red interna infectado por malware (Botnet) intentando propagarse lateralmente hacia servidores críticos adivinando credenciales. \\
+Insider Malicioso (Sabotage / DoS) & 192.168.10.74, 192.168.10.82 & Generación de tráfico basura (Flood) y saturación de aplicaciones web para causar indisponibilidad. & Empleado descontento o atacante infiltrado cuyo objetivo es interrumpir las operaciones del negocio (Denegación de Servicio) desde adentro. \\
+\hline
+\end{tabular}}
+\end{table}
+
+Los resultados demuestran la efectividad de T-Pot en la detección de amenazas internas, con un enfoque en la observación pasiva y el análisis forense.
 
 \subsection{Resultados principales}
 
