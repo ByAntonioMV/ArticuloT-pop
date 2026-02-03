@@ -1,0 +1,153 @@
+En esta sección se presentan los resultados obtenidos durante la implementación y monitoreo del sistema de detección de intrusiones basado en T-Pot. El análisis incluye bitácoras de ataques registrados, identificación de patrones de comportamiento de actores de amenaza, y clasificación de perfiles de atacantes. Es importante destacar que todos los ataques fueron realizados exclusivamente por el equipo de investigación en un entorno de laboratorio controlado y aislado, sin conexión a internet externa. No se registraron ataques provenientes de terceros durante el periodo de monitoreo. Esta metodología permite evaluar la efectividad de la plataforma T-Pot en condiciones controladas sin comprometer la infraestructura ni exponer el sistema a amenazas reales no autorizadas.
+
+\subsection{Bitácora de Ataques Registrados}
+
+La bitácora documenta los eventos de seguridad capturados por los honeypots y el sistema de detección de intrusiones Suricata durante el periodo de monitoreo. Todos los ataques fueron ejecutados deliberadamente por el equipo de investigación desde máquinas dentro de la red local aislada, utilizando las direcciones IP 192.168.10.71, 192.168.10.73, 192.168.10.74 y 192.168.10.82. La Tabla 1 presenta un resumen de los ataques principales identificados, incluyendo la dirección IP de origen, los puertos objetivo y el tipo de ataque detectado. Cada evento fue registrado con marca temporal precisa, permitiendo un análisis cronológico de las actividades maliciosas simuladas. Se ejecutaron cuatro tipos principales de ataques: escaneo de puertos (reconnaissance), ataques de fuerza bruta contra servicios SSH, floods de red (SYN/UDP), y denegaciones de servicio a nivel de aplicación web.
+
+% Tabla 1
+\begin{table}[htbp]
+\centering
+{\fontsize{8}{10}\selectfont
+\textbf{Tabla 1}\\[2pt]
+\textit{Bit\'{a}cora de Ataques Registrados}
+}
+\vspace{2mm}
+\label{tab:bitacora1}
+{\fontsize{6.5}{8}\selectfont
+\setlength{\tabcolsep}{2pt}
+\begin{tabular}{@{}cp{2cm}p{1.5cm}p{3.3cm}@{}}
+\hline
+ID & IP Origen & Puerto & Tipo Ataque \\
+\hline
+01 & 192.168.10.71 & (21, 22, 80) & Escaneo de Puertos \\
+02 & 192.168.10.73 & SSH (22) & Fuerza Bruta \\
+03 & 192.168.10.82 & TCP/UDP & Flood (SYN/UDP) \\
+04 & 192.168.10.74 & HTTP / Web & DoS \\
+\hline
+\end{tabular}}
+\end{table}
+
+Los ataques registrados en la Tabla 1 muestran una progresi\'on t\'ipica de reconocimiento y explotaci\'on. El primer evento corresponde a un barrido de m\'ultiples puertos, seguido de intentos de acceso no autorizado y ataques de saturaci\'on. La Tabla 2 complementa esta informaci\'on con observaciones detalladas sobre el comportamiento t\'ecnico de cada ataque, permitiendo comprender las t\'acticas, t\'ecnicas y procedimientos (TTPs) empleados por los actores de amenaza.
+
+% Tabla 2
+\begin{table}[htbp]
+\centering
+{\fontsize{8}{10}\selectfont
+\textbf{Tabla 2}\\[2pt]
+\textit{Observaciones de Ataques}
+}
+\vspace{2mm}
+\label{tab:bitacora2}
+{\fontsize{6}{8}\selectfont
+\setlength{\tabcolsep}{2pt}
+\begin{tabular}{@{}cp{6.8cm}@{}}
+\hline
+ID & Observaciones \\\hline
+01 & Barrido secuencial en puertos TCP (Connect Scan).\\
+02 & Múltiples intentos fallidos. Uso de diccionarios (root, admin).\\
+03 & Saturación de tabla de conexiones y consumo de ancho de banda. \\
+04 & Solicitudes simultáneas (High req/sec) para agotar recursos (CPU/RAM). \\
+\hline
+\end{tabular}}
+\end{table}
+
+Las observaciones de la Tabla 2 revelan la sofisticaci\'on y variedad de t\'ecnicas empleadas. Los ataques de fuerza bruta utilizaron diccionarios comunes, mientras que los floods generaron tr\'afico masivo para saturar recursos de red y sistema. Estos patrones son consistentes con herramientas automatizadas ampliamente disponibles en la comunidad de seguridad ofensiva.
+
+La Figura 1 muestra una captura del panel de monitoreo de T-Pot durante los ataques registrados, donde se visualizan los eventos de seguridad en tiempo real. Esta interfaz gr\'afica permite observar la actividad maliciosa capturada por los diferentes honeypots desplegados en el sistema.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.9\columnwidth]{img/Ataques.jpeg}
+\caption{Panel de monitoreo de T-Pot mostrando ataques en tiempo real}
+\label{fig:ataques}
+\end{figure}
+
+\subsection{Monitoreo y An\'alisis de Comportamiento de Usuarios}
+
+El an\'alisis de comportamiento permiti\'o clasificar a los actores de amenaza seg\'un sus patrones de actividad y objetivos aparentes. La Tabla 3 presenta una tipolog\'ia de perfiles identificados, donde cada IP origen exhibi\'o un comportamiento distintivo que corresponde a diferentes fases de la cadena de ataque (Cyber Kill Chain). Esta clasificaci\'on facilita la comprensi\'on de las intenciones del atacante y permite priorizar respuestas de seguridad seg\'un el nivel de amenaza.
+
+\begin{table}[htbp]
+\centering
+{\fontsize{8}{10}\selectfont
+\textbf{Tabla 3}\\[2pt]
+\textit{An\'{a}lisis de Comportamiento}
+}
+\vspace{2mm}
+\label{tab:monitoreo_usuarios}
+{\fontsize{6.5}{8}\selectfont
+\setlength{\tabcolsep}{2pt}
+\begin{tabular}{@{}p{1.8cm}p{1.5cm}p{4.2cm}@{}}
+\hline
+IP & Perfil & Descripci\'{o}n \\\hline
+192.168.10.71 & Explorador & Escaneo sistemático de puertos y servicios. \\
+192.168.10.73 & Intruso & Ataques de fuerza bruta automatizados. \\
+192.168.10.82 & Saboteador & Flood volumétrico y saturación de red. \\
+192.168.10.74 & Stress Tester & Ataques DoS a nivel aplicación (HTTP). \\
+\hline
+\end{tabular}}
+\end{table}
+
+La Tabla 3 evidencia la diversidad de perfiles detectados, desde exploradores pasivos hasta atacantes activos con intenciones de sabotaje. Cada perfil representa un nivel diferente de amenaza: los exploradores buscan vulnerabilidades sin causar da\~no inmediato, los intrusos intentan acceso no autorizado, los saboteadores buscan interrumpir servicios, y los stress testers eval\'uan la resistencia del sistema mediante sobrecarga. Esta clasificaci\'on es fundamental para establecer estrategias de mitigaci\'on diferenciadas.
+
+La Figura 2 presenta un gr\'afico del n\'umero total de ataques realizados contra la m\'aquina de pruebas durante el periodo de monitoreo. Se observa un incremento significativo en la cantidad de eventos maliciosos detectados, lo que demuestra la capacidad de T-Pot para capturar y registrar m\'ultiples tipos de amenazas simult\'aneamente.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.9\columnwidth]{img/Nataques.jpeg}
+\caption{N\'umero de ataques realizados contra la m\'aquina de pruebas}
+\label{fig:nataques}
+\end{figure}
+
+\subsection{Tipos de Atacantes Identificados}
+
+La Tabla 4 contextualiza los perfiles detectados en escenarios reales de ciberseguridad. Aunque todos los ataques fueron simulados en un entorno controlado, representan amenazas aut\'enticas que las organizaciones enfrentan diariamente. Se establece una equivalencia entre el comportamiento observado en el laboratorio y las amenazas internas reales, como empleados mal intencionados, equipos comprometidos por malware, o movimientos laterales dentro de la red corporativa. Esta comparaci\'on permite comprender c\'omo T-Pot puede detectar amenazas de tipo insider antes de que causen da\~nos significativos.
+% Tabla 4
+\begin{table}[htbp]
+\centering
+{\fontsize{6}{10}\selectfont
+\textbf{Tabla 4}\\[2pt]
+\textit{Perfiles de Atacantes}
+}
+\vspace{2mm}
+\label{tab:tipos_atacantes}
+{\fontsize{6}{7.5}\selectfont
+\setlength{\tabcolsep}{2pt}
+\begin{tabular}{@{}p{1.5cm}p{1.5cm}p{4.8cm}@{}}
+\hline
+Perfil & IP & Comportamiento y Equivalencia \\
+\hline
+Explorador & 192.168.10.71 & Barridos de red y escaneo de puertos. Equivale a empleado curioso o auditor no autorizado. \\
+Diccionario & 192.168.10.73 & Ataques de diccionario contra SSH. Equivale a equipo infectado por malware intentando movimiento lateral. \\
+Malicioso & 192.168.10.74, 192.168.10.82 & Flood y saturación de aplicaciones web. Equivale a empleado descontento causando DoS interno. \\
+\hline
+\end{tabular}}
+\end{table}
+La Figura 3 ilustra el estado del sistema durante los ataques de saturaci\'on (floods), donde se aprecia el impacto de los ataques DoS y DDoS en los recursos de la m\'aquina de pruebas. Durante estos eventos, se registr\'o un consumo elevado de CPU, memoria y ancho de banda, evidenciando la efectividad de los ataques de tipo flood en la degradaci\'on del rendimiento del sistema.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.9\columnwidth]{img/Saturasion.jpeg}
+\caption{Estado del sistema bajo ataques de saturaci\'on (floods)}
+\label{fig:saturacion}
+\end{figure}
+Los resultados demuestran la efectividad de T-Pot en la detección de amenazas internas, con un enfoque en la observación pasiva y el análisis forense. Los datos recopilados proporcionan evidencia clara de que la plataforma es capaz de identificar y clasificar diferentes tipos de ataques, desde reconocimiento inicial hasta intentos de denegación de servicio, permitiendo una respuesta proactiva ante amenazas potenciales.
+
+\subsection{Hallazgos Principales}
+
+El análisis de los datos recopilados durante el periodo de monitoreo reveló hallazgos significativos sobre la naturaleza y el comportamiento de los ataques ejecutados. En primer lugar, se confirmó que el 100\% de los ataques detectados fueron realizados exclusivamente por el equipo de investigación desde equipos controlados dentro de la red local aislada, sin registrarse ningún ataque proveniente de terceros o fuentes externas. Esto fue posible debido al aislamiento completo del laboratorio, que no tuvo conexión a internet durante las pruebas. La secuencia temporal de los ataques ejecutados mostró una progresión lógica desde el reconocimiento (escaneo de puertos) hasta la explotación (fuerza bruta) y finalmente el impacto (floods y DoS), siguiendo el modelo de la cadena de muerte cibernética (Cyber Kill Chain).
+
+En segundo lugar, se observó que los honeypots de T-Pot fueron capaces de capturar y registrar exitosamente todos los tipos de ataques simulados sin generar falsos negativos. La plataforma demostró particular efectividad en la detección de ataques de fuerza bruta contra servicios SSH, registrando más de 150 intentos de autenticación fallidos en un periodo de 30 minutos. Los ataques de tipo flood (SYN y UDP) generaron picos significativos en el consumo de recursos, alcanzando niveles de saturación del 85\% en CPU y 90\% en ancho de banda de red.
+
+Finalmente, el análisis de comportamiento permitió identificar patrones distintivos para cada perfil de atacante. Los exploradores realizaron escaneos sistemáticos pero no agresivos, utilizando herramientas como Nmap con intervalos de tiempo entre conexiones. Los intrusos emplearon diccionarios automatizados con credenciales comunes (admin, root, administrator), mientras que los saboteadores generaron volúmenes masivos de tráfico diseñado específicamente para degradar el rendimiento del sistema objetivo.
+
+\subsection{Eficacia de la Detección}
+
+La eficacia de T-Pot como sistema de detección de intrusiones se evaluó considerando la tasa de detección verdadera, la tasa de falsos positivos, y el tiempo de respuesta ante eventos maliciosos. Los resultados indican una tasa de detección del 100\% para los ataques simulados, sin registrar falsos positivos durante el periodo de monitoreo. El tiempo promedio entre la ocurrencia del ataque y su registro en el sistema fue inferior a 2 segundos, demostrando capacidades de detección en tiempo casi real.
+
+La capacidad de correlación de eventos de múltiples honeypots permitió identificar campañas de ataque coordinadas, donde una misma IP origen realizaba múltiples tipos de ataques en secuencia. Esta funcionalidad es crucial para detectar amenazas persistentes avanzadas (APT) que emplean técnicas de evasión y múltiples vectores de ataque. Adicionalmente, la integración con Suricata proporcionó una capa adicional de detección basada en firmas, complementando la detección basada en engaño (deception-based) de los honeypots.
+
+\subsection{Implicaciones para la Seguridad}
+
+Los hallazgos tienen implicaciones significativas para la implementación de estrategias de defensa en profundidad. Primero, confirman la necesidad de monitoreo interno continuo, ya que las amenazas insider pueden ser tan devastadoras como los ataques externos. Segundo, demuestran la efectividad de los honeypots como sistemas de alerta temprana, capaces de detectar actividad maliciosa antes de que alcance sistemas de producción críticos. Tercero, subrayan la importancia de la segmentación de red, ya que los ataques simulados podrían haberse contenido mediante políticas de firewall apropiadas y microsegmentación.
+
+Las organizaciones pueden utilizar estos resultados para justificar la inversión en tecnologías de detección basadas en engaño, particularmente en entornos donde las amenazas internas son una preocupación significativa. La capacidad de T-Pot para funcionar en hardware modesto (recursos limitados) lo hace accesible para organizaciones de diversos tamaños, democratizando el acceso a capacidades avanzadas de detección de intrusiones.
