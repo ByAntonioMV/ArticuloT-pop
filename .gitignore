@@ -1,4 +1,4 @@
-# Archivos y carpetas generados por LaTeX
+# === LaTeX / latexmk ===
 *.aux
 *.log
 *.out
@@ -10,11 +10,16 @@
 *.synctex.gz
 *.bbl
 *.blg
+*.run.xml
+
+# === PDFs generados (opcional) ===
 *.pdf
 
-# Archivos temporales de editores
-*~
-*.swp
+# === Archivos temporales ===
+*.tmp
 *.bak
-.DS_Store
-Thumbs.db
+*.swp
+*.swo
+
+# === VS Code ===
+.vscode/
