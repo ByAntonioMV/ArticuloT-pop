@@ -7,20 +7,52 @@
 \usepackage{lmodern}           
 \usepackage{graphicx}          
 \usepackage{cite}              
-
-% --- ESTE ERA EL ERROR: FALTA ESTA LÍNEA ---
 \usepackage{geometry} 
 \geometry{margin=2cm}
+\usepackage{ragged2e}
 
 % --- TÍTULO Y AUTORES ---
 \title{\textbf{Detección y Análisis de Intrusiones en Redes Mediante la Plataforma T-Pot}}
-
-\author{
-    D. Cruz, A. Moreno, S. Peña, B. Olmos \\
-    \small Facultad de Ingeniería \\
-    \small \texttt{antonio-alain@WorkSpace.edu}
-}
 \date{}
+\author{
+    % --- FILA 1 ---
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \large Antonio Alain Moreno Vázquez \\ 
+        \small Licenciatura en Informática,\\Universidad de la Cañada, México \\ 
+        \texttt{li\_antoniomv@unca.edu.mx}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.5\textwidth}
+        \centering
+        \large Brayan Emmanuel Olmos Santiago \\
+        \small Licenciatura en Informática,\\Universidad de la Cañada, México \\
+        \texttt{li\_brayanolmos@unca.edu.mx}
+    \end{minipage}\\[0.5cm]
+    % --- FILA 2 ---
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \large David Danatael Cruz Sánchez \\
+        \small Licenciatura en Informática,\\Universidad de la Cañada, México \\
+        \texttt{li\_davidcruz@unca.edu.mx}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \large Sergio Eliseo Peña Calderón \\
+        \small Licenciatura en Informática,\\Universidad de la Cañada, México \\
+        \texttt{li\_sergiopc@unca.edu.mx}
+    \end{minipage}\\[0.5cm]
+    % --- FILA 3 (CENTRADO) ---
+    \hspace*{\fill}
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \large Carmen Carlota Martínez Gil \\
+        \small Licenciatura en Informática,\\Universidad de la Cañada, México \\
+        \texttt{cmartinez@unca.edu.mx}
+    \end{minipage}
+    \hspace*{\fill}
+}
 
 \begin{document}
 
@@ -28,12 +60,18 @@
 \twocolumn[
   \begin{centering}
     \maketitle
-    \begin{abstract}
-        \input{segmentos/abstract}
-        \vspace{0.4cm}
-        \noindent \textbf{Palabras clave:} IDS, Honeypot, T-Pot, Ciberseguridad.
-        \vspace{0.6cm}
-    \end{abstract}
+    \section*{Resumen}
+    \begin{justify}
+    \input{segmentos/abstract}
+    \end{justify}
+    \section*{Abstract}
+    \begin{justify}
+    \input{segmentos/abstract_en}
+    \end{justify}
+    \section*{Palabras clave}
+    {\centering
+    Detección de intrusiones, Honeypots, T-Pot, Ciberseguridad, Análisis forense, Redes aisladas.\par
+    }
   \end{centering}
 ]
 
