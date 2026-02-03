@@ -7,10 +7,14 @@
 \usepackage{lmodern}           
 \usepackage{graphicx}          
 \usepackage{cite}              
-
-% --- ESTE ERA EL ERROR: FALTA ESTA LÍNEA ---
 \usepackage{geometry} 
 \geometry{margin=2cm}
+\usepackage{float} 
+\usepackage{booktabs} 
+\usepackage{multirow} 
+\usepackage{array}  
+\usepackage{tabularx}
+\usepackage{ragged2e}
 
 % --- TÍTULO Y AUTORES ---
 \title{\textbf{Detección y Análisis de Intrusiones en Redes Mediante la Plataforma T-Pot}}
@@ -24,12 +28,12 @@
 
 \begin{document}
 
-% Formato de título y resumen a una columna (estilo artículo científico)
+% Formato de título y resumen a una columna
 \twocolumn[
   \begin{centering}
     \maketitle
     \begin{abstract}
-        \input{segmentos/abstract}
+        Resumen placeholder.
         \vspace{0.4cm}
         \noindent \textbf{Palabras clave:} IDS, Honeypot, T-Pot, Ciberseguridad.
         \vspace{0.6cm}
@@ -38,24 +42,20 @@
 ]
 
 \section{Introducción}
-\input{segmentos/introduccion}
 
 \section{Metodología}
-\input{segmentos/metodologia}
 
 \subsection{Diseño y Escenario}
-\input{segmentos/diseno}
 
 \subsection{Población y Muestra}
 \input{segmentos/poblacion}
 
 \section{Resultados}
-\input{segmentos/resultados}
+
+\section{Resultados}
 
 \section{Discusión y Conclusiones}
-\input{segmentos/discusion}
 
 \section{Bibliografía}
-\input{segmentos/bibliografia}
 
 \end{document}
