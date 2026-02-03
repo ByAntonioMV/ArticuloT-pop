@@ -2,13 +2,13 @@ En esta sección se presentan los resultados obtenidos durante la implementació
 
 \subsection{Bitácora de Ataques Registrados}
 
-La bitácora documenta los eventos de seguridad capturados por los honeypots y el sistema de detección de intrusiones Suricata durante el periodo de monitoreo. Todos los ataques fueron ejecutados deliberadamente por el equipo de investigación desde máquinas dentro de la red local aislada, utilizando las direcciones IP 192.168.10.71, 192.168.10.73, 192.168.10.74 y 192.168.10.82. La Tabla 1 presenta un resumen de los ataques principales identificados, incluyendo la dirección IP de origen, los puertos objetivo y el tipo de ataque detectado. Cada evento fue registrado con marca temporal precisa, permitiendo un análisis cronológico de las actividades maliciosas simuladas. Se ejecutaron cuatro tipos principales de ataques: escaneo de puertos (reconnaissance), ataques de fuerza bruta contra servicios SSH, floods de red (SYN/UDP), y denegaciones de servicio a nivel de aplicación web.
+La bitácora documenta los eventos de seguridad capturados por los honeypots y el sistema de detección de intrusiones Suricata durante el periodo de monitoreo. Todos los ataques fueron ejecutados deliberadamente por el equipo de investigación desde máquinas dentro de la red local aislada, utilizando las direcciones IP 192.168.10.71, 192.168.10.73, 192.168.10.74 y 192.168.10.82. La Tabla 2 presenta un resumen de los ataques principales identificados, incluyendo la dirección IP de origen, los puertos objetivo y el tipo de ataque detectado. Cada evento fue registrado con marca temporal precisa, permitiendo un análisis cronológico de las actividades maliciosas simuladas. Se ejecutaron cuatro tipos principales de ataques: escaneo de puertos (reconnaissance), ataques de fuerza bruta contra servicios SSH, floods de red (SYN/UDP), y denegaciones de servicio a nivel de aplicación web.
 
-% Tabla 1
+% Tabla 2
 \begin{table}[htbp]
 \centering
 {\fontsize{8}{10}\selectfont
-\textbf{Tabla 1}\\[2pt]
+\textbf{Tabla 2}\\[2pt]
 \textit{Bit\'{a}cora de Ataques Registrados}
 }
 \vspace{2mm}
@@ -27,13 +27,13 @@ ID & IP Origen & Puerto & Tipo Ataque \\
 \end{tabular}}
 \end{table}
 
-Los ataques registrados en la Tabla 1 muestran una progresi\'on t\'ipica de reconocimiento y explotaci\'on. El primer evento corresponde a un barrido de m\'ultiples puertos, seguido de intentos de acceso no autorizado y ataques de saturaci\'on. La Tabla 2 complementa esta informaci\'on con observaciones detalladas sobre el comportamiento t\'ecnico de cada ataque, permitiendo comprender las t\'acticas, t\'ecnicas y procedimientos (TTPs) empleados por los actores de amenaza.
+Los ataques registrados en la Tabla 2 muestran una progresi\'on t\'ipica de reconocimiento y explotaci\'on. El primer evento corresponde a un barrido de m\'ultiples puertos, seguido de intentos de acceso no autorizado y ataques de saturaci\'on. La Tabla 3 complementa esta informaci\'on con observaciones detalladas sobre el comportamiento t\'ecnico de cada ataque, permitiendo comprender las t\'acticas, t\'ecnicas y procedimientos (TTPs) empleados por los actores de amenaza.
 
-% Tabla 2
+% Tabla 3
 \begin{table}[htbp]
 \centering
 {\fontsize{8}{10}\selectfont
-\textbf{Tabla 2}\\[2pt]
+\textbf{Tabla 3}\\[2pt]
 \textit{Observaciones de Ataques}
 }
 \vspace{2mm}
@@ -51,25 +51,25 @@ ID & Observaciones \\\hline
 \end{tabular}}
 \end{table}
 
-Las observaciones de la Tabla 2 revelan la sofisticaci\'on y variedad de t\'ecnicas empleadas. Los ataques de fuerza bruta utilizaron diccionarios comunes, mientras que los floods generaron tr\'afico masivo para saturar recursos de red y sistema. Estos patrones son consistentes con herramientas automatizadas ampliamente disponibles en la comunidad de seguridad ofensiva.
+Las observaciones de la Tabla 3 revelan la sofisticaci\'on y variedad de t\'ecnicas empleadas. Los ataques de fuerza bruta utilizaron diccionarios comunes, mientras que los floods generaron tr\'afico masivo para saturar recursos de red y sistema. Estos patrones son consistentes con herramientas automatizadas ampliamente disponibles en la comunidad de seguridad ofensiva.
 
 La Figura 1 muestra una captura del panel de monitoreo de T-Pot durante los ataques registrados, donde se visualizan los eventos de seguridad en tiempo real. Esta interfaz gr\'afica permite observar la actividad maliciosa capturada por los diferentes honeypots desplegados en el sistema.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.9\columnwidth]{img/Ataques.jpeg}
-\caption{Panel de monitoreo de T-Pot mostrando ataques en tiempo real}
+\caption{Ataques en tiempo real}
 \label{fig:ataques}
 \end{figure}
 
 \subsection{Monitoreo y An\'alisis de Comportamiento de Usuarios}
 
-El an\'alisis de comportamiento permiti\'o clasificar a los actores de amenaza seg\'un sus patrones de actividad y objetivos aparentes. La Tabla 3 presenta una tipolog\'ia de perfiles identificados, donde cada IP origen exhibi\'o un comportamiento distintivo que corresponde a diferentes fases de la cadena de ataque (Cyber Kill Chain). Esta clasificaci\'on facilita la comprensi\'on de las intenciones del atacante y permite priorizar respuestas de seguridad seg\'un el nivel de amenaza.
+El an\'alisis de comportamiento permiti\'o clasificar a los actores de amenaza seg\'un sus patrones de actividad y objetivos aparentes. La Tabla 4 presenta una tipolog\'ia de perfiles identificados, donde cada IP origen exhibi\'o un comportamiento distintivo que corresponde a diferentes fases de la cadena de ataque (Cyber Kill Chain). Esta clasificaci\'on facilita la comprensi\'on de las intenciones del atacante y permite priorizar respuestas de seguridad seg\'un el nivel de amenaza.
 
 \begin{table}[htbp]
 \centering
 {\fontsize{8}{10}\selectfont
-\textbf{Tabla 3}\\[2pt]
+\textbf{Tabla 4}\\[2pt]
 \textit{An\'{a}lisis de Comportamiento}
 }
 \vspace{2mm}
@@ -87,25 +87,25 @@ IP & Perfil & Descripci\'{o}n \\\hline
 \end{tabular}}
 \end{table}
 
-La Tabla 3 evidencia la diversidad de perfiles detectados, desde exploradores pasivos hasta atacantes activos con intenciones de sabotaje. Cada perfil representa un nivel diferente de amenaza: los exploradores buscan vulnerabilidades sin causar da\~no inmediato, los intrusos intentan acceso no autorizado, los saboteadores buscan interrumpir servicios, y los stress testers eval\'uan la resistencia del sistema mediante sobrecarga. Esta clasificaci\'on es fundamental para establecer estrategias de mitigaci\'on diferenciadas.
+La Tabla 4 evidencia la diversidad de perfiles detectados, desde exploradores pasivos hasta atacantes activos con intenciones de sabotaje. Cada perfil representa un nivel diferente de amenaza: los exploradores buscan vulnerabilidades sin causar da\~no inmediato, los intrusos intentan acceso no autorizado, los saboteadores buscan interrumpir servicios, y los stress testers eval\'uan la resistencia del sistema mediante sobrecarga. Esta clasificaci\'on es fundamental para establecer estrategias de mitigaci\'on diferenciadas.
 
-La Figura 2 presenta un gr\'afico del n\'umero total de ataques realizados contra la m\'aquina de pruebas durante el periodo de monitoreo. Se observa un incremento significativo en la cantidad de eventos maliciosos detectados, lo que demuestra la capacidad de T-Pot para capturar y registrar m\'ultiples tipos de amenazas simult\'aneamente.
+La Figura 2 muestra al equipo de investigaci\'on realizando los ataques en tiempo real contra la m\'aquina de pruebas durante el periodo de monitoreo. Se observa al personal ejecutando las diferentes t\'ecnicas de ataque de manera controlada en el entorno de laboratorio.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.9\columnwidth]{img/Nataques.jpeg}
-\caption{N\'umero de ataques realizados contra la m\'aquina de pruebas}
+\caption{Número de ataques realizados por el equipo de investigación}
 \label{fig:nataques}
 \end{figure}
 
 \subsection{Tipos de Atacantes Identificados}
 
-La Tabla 4 contextualiza los perfiles detectados en escenarios reales de ciberseguridad. Aunque todos los ataques fueron simulados en un entorno controlado, representan amenazas aut\'enticas que las organizaciones enfrentan diariamente. Se establece una equivalencia entre el comportamiento observado en el laboratorio y las amenazas internas reales, como empleados mal intencionados, equipos comprometidos por malware, o movimientos laterales dentro de la red corporativa. Esta comparaci\'on permite comprender c\'omo T-Pot puede detectar amenazas de tipo insider antes de que causen da\~nos significativos.
-% Tabla 4
+La Tabla 5 contextualiza los perfiles detectados en escenarios reales de ciberseguridad. Aunque todos los ataques fueron simulados en un entorno controlado, representan amenazas aut\'enticas que las organizaciones enfrentan diariamente. Se establece una equivalencia entre el comportamiento observado en el laboratorio y las amenazas internas reales, como empleados mal intencionados, equipos comprometidos por malware, o movimientos laterales dentro de la red corporativa. Esta comparaci\'on permite comprender c\'omo T-Pot puede detectar amenazas de tipo insider antes de que causen da\~nos significativos.
+% Tabla 5
 \begin{table}[htbp]
 \centering
 {\fontsize{6}{10}\selectfont
-\textbf{Tabla 4}\\[2pt]
+\textbf{Tabla 5}\\[2pt]
 \textit{Perfiles de Atacantes}
 }
 \vspace{2mm}
