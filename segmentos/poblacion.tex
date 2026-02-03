@@ -4,27 +4,27 @@ La muestra seleccionada para el estudio consistió en un conjunto de 4 estacione
 
 La selección de esta muestra se basa en la necesidad de representar diversidad en los perfiles de amenaza interna, como se detalla en la Tabla~\ref{tab:tipos-atacantes}. Aunque limitada a 4 actores, la muestra capturó un total de eventos representativos (e.g., múltiples intentos de login, floods y escaneos), permitiendo un análisis cualitativo y cuantitativo de las interacciones con los honeypots. Esta aproximación facilita la extrapolación a poblaciones más amplias en entornos productivos, donde las amenazas internas representan un riesgo significativo debido a su acceso inicial legítimo.
 
-\begin{table*}[t!]
+\begin{table}[!htb]
 \centering
-\footnotesize   % más pequeño que \small para que quepa mejor
+\tiny
 \caption{Tipos de Atacantes Identificados (Muestra Seleccionada)}
 \label{tab:tipos-atacantes}
 \begin{tabular}{
-  >{\RaggedRight\hspace{0pt}}p{3.5cm}
-  l
-  >{\RaggedRight\hspace{0pt}}p{4.8cm}
-  >{\RaggedRight\hspace{0pt}}p{4.8cm}
+  >{\RaggedRight\hspace{0pt}}p{1.2cm}
+  >{\centering\arraybackslash}p{1.5cm}
+  >{\RaggedRight\hspace{0pt}}p{2.0cm}
+  >{\RaggedRight\hspace{0pt}}p{2.0cm}
 }
 \toprule
-Perfil de Amenaza (Simulado) & Origen (IP) & Comportamiento Técnico Observado & Equivalencia en Escenario Real \\
+Perfil de Amenaza & Origen (IP) & Comportamiento Observado & Equivalencia Real \\
 \midrule
-Insider Explorador (Reconnaissance) & 192.168.10.71 & Ejecución de barridos de red y escaneo de puertos para inventariar servicios. No hubo intento de explotación destructiva. & Empleado curioso o auditor interno no autorizado buscando servidores vulnerables o mal configurados dentro de la intranet. \\[1ex]
-Host Comprometido (Lateral Movement) & 192.168.10.73 & Ataques automatizados de diccionario contra servicios de administración (SSH). Alta velocidad de intentos. & Un equipo de la red interna infectado por malware (Botnet) intentando propagarse lateralmente hacia servidores críticos adivinando credenciales. \\[1ex]
-Insider Malicioso (Sabotage / DoS) & 192.168.10.74 & Generación de tráfico basura (Flood) y saturación de aplicaciones web para causar indisponibilidad. & Empleado descontento o atacante infiltrado cuyo objetivo es interrumpir las operaciones del negocio (Denegación de Servicio) desde adentro. \\
-& 192.168.10.82 & (mismo comportamiento) & (misma equivalencia) \\
+Insider Explorador (Recon) & 192.168.10.71 & Barridos de red y escaneo de puertos. Sin explotación. & Auditor/empleado curioso buscando vulnerabilidades internas. \\[0.3ex]
+Host Comprometido (Lateral) & 192.168.10.73 & Diccionario masivo contra SSH (alta velocidad). & Equipo infectado propagando malware lateralmente. \\[0.3ex]
+Insider Malicioso (DoS) & 192.168.10.74 192.168.10.82 & Flood y saturación web causando indisponibilidad. & Empleado descontento o infiltrado causando denegación interna. \\
+
 \bottomrule
 \end{tabular}
-\end{table*}
+\end{table}
 
 La muestra, aunque reducida, representa una diversidad suficiente de vectores de amenaza interna para evaluar la capacidad de detección de los honeypots integrados en T-Pot (como Cowrie para SSH/Telnet, Dionaea para captura de malware y Honeytrap para conexiones genéricas). Los eventos capturados generaron logs detallados en Elastic Stack, facilitando el monitoreo en tiempo real y el análisis posterior.
 
