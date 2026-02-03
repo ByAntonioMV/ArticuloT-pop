@@ -1,0 +1,25 @@
+# === LaTeX / latexmk ===
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg
+*.run.xml
+
+# === PDFs generados (opcional) ===
+*.pdf
+
+# === Archivos temporales ===
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# === VS Code ===
+.vscode/
