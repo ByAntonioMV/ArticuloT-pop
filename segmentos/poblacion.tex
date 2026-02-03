@@ -1,0 +1,31 @@
+En el contexto de esta investigación, la población se define como el conjunto total de posibles amenazas y actividades maliciosas que podrían presentarse en un entorno de red local (LAN) controlado, similar al simulado en el laboratorio. Esto incluye todos los tipos de intrusiones internas, tales como escaneos de puertos, intentos de fuerza bruta, floods volumétricos y ataques de denegación de servicio (DoS) en la capa de aplicación, generados por actores con acceso a la red interna. Dado que el experimento se realizó en un segmento aislado sin exposición a internet, la población se limita a amenazas internas, representando escenarios reales como empleados descontentos, hosts comprometidos o malware con movimiento lateral dentro de una intranet universitaria o corporativa.
+
+La muestra seleccionada para el estudio consistió en un conjunto de 4 estaciones de ataque simuladas, correspondientes a computadoras portátiles independientes conectadas a la red local a través de un switch Ethernet. Estas estaciones generaron tráfico malicioso controlado, capturado por la plataforma T-Pot. Las direcciones IP asociadas a la muestra fueron: 192.168.10.71 (explorador de reconnaissance), 192.168.10.73 (intruso de fuerza bruta), 192.168.10.82 (saboteador volumétrico) y 192.168.10.74 (tester de estrés en capa de aplicación). Esta muestra no probabilística fue seleccionada por conveniencia, ya que permitió simular patrones de comportamiento reales en un entorno físico controlado, asegurando la reproducibilidad y el aislamiento de variables externas.
+
+La selección de esta muestra se basa en la necesidad de representar diversidad en los perfiles de amenaza interna, como se detalla en la Tabla~\ref{tab:tipos-atacantes}. Aunque limitada a 4 actores, la muestra capturó un total de eventos representativos (e.g., múltiples intentos de login, floods y escaneos), permitiendo un análisis cualitativo y cuantitativo de las interacciones con los honeypots. Esta aproximación facilita la extrapolación a poblaciones más amplias en entornos productivos, donde las amenazas internas representan un riesgo significativo debido a su acceso inicial legítimo.
+
+\begin{table}[!htb]
+\centering
+\tiny
+\caption{Tipos de Atacantes Identificados (Muestra Seleccionada)}
+\label{tab:tipos-atacantes}
+\begin{tabular}{
+  >{\RaggedRight\hspace{0pt}}p{1.2cm}
+  >{\centering\arraybackslash}p{1.5cm}
+  >{\RaggedRight\hspace{0pt}}p{2.0cm}
+  >{\RaggedRight\hspace{0pt}}p{2.0cm}
+}
+\toprule
+Perfil de Amenaza & Origen (IP) & Comportamiento Observado & Equivalencia Real \\
+\midrule
+Insider Explorador (Recon) & 192.168.10.71 & Barridos de red y escaneo de puertos. Sin explotación. & Auditor/empleado curioso buscando vulnerabilidades internas. \\[0.3ex]
+Host Comprometido (Lateral) & 192.168.10.73 & Diccionario masivo contra SSH (alta velocidad). & Equipo infectado propagando malware lateralmente. \\[0.3ex]
+Insider Malicioso (DoS) & 192.168.10.74 192.168.10.82 & Flood y saturación web causando indisponibilidad. & Empleado descontento o infiltrado causando denegación interna. \\
+
+\bottomrule
+\end{tabular}
+\end{table}
+
+La muestra, aunque reducida, representa una diversidad suficiente de vectores de amenaza interna para evaluar la capacidad de detección de los honeypots integrados en T-Pot (como Cowrie para SSH/Telnet, Dionaea para captura de malware y Honeytrap para conexiones genéricas). Los eventos capturados generaron logs detallados en Elastic Stack, facilitando el monitoreo en tiempo real y el análisis posterior.
+
+Dado el carácter experimental y controlado del laboratorio (sin exposición externa), no se aplicó muestreo probabilístico ni cálculo estadístico de tamaño muestral. El objetivo principal fue la demostración práctica de detección y registro de intrusiones internas mediante honeypots, más que la inferencia estadística generalizable. Las limitaciones inherentes (ausencia de amenazas externas y escala pequeña) se compensan con la reproducibilidad total del escenario y la robustez de la plataforma T-Pot.
